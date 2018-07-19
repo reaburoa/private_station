@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a043e87b497f55c75d507b27466415b7",
+    "content-hash": "94bd4c9d36d8f6ab5062926db52d2117",
     "packages": [
         {
             "name": "rean/pdo-object",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/reaburoa/pdo.git",
-                "reference": "359088fcbd842ddc2fa85c2bb7932a501b9ef6a0"
+                "reference": "5577308d8b911735ff8c802909d4f686c0fabda5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reaburoa/pdo/zipball/359088fcbd842ddc2fa85c2bb7932a501b9ef6a0",
-                "reference": "359088fcbd842ddc2fa85c2bb7932a501b9ef6a0",
+                "url": "https://api.github.com/repos/reaburoa/pdo/zipball/5577308d8b911735ff8c802909d4f686c0fabda5",
+                "reference": "5577308d8b911735ff8c802909d4f686c0fabda5",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,7 @@
                 "mysql",
                 "pdo"
             ],
-            "time": "2018-07-19T06:30:01+00:00"
+            "time": "2017-09-30T12:00:44+00:00"
         }
     ],
     "packages-dev": [],
