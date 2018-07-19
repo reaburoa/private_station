@@ -1,0 +1,45 @@
+[
+    {
+        "name": "rean/pdo-object",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/reaburoa/pdo.git",
+            "reference": "359088fcbd842ddc2fa85c2bb7932a501b9ef6a0"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/reaburoa/pdo/zipball/359088fcbd842ddc2fa85c2bb7932a501b9ef6a0",
+            "reference": "359088fcbd842ddc2fa85c2bb7932a501b9ef6a0",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2018-07-19T06:30:01+00:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Rean\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Lei Zhang",
+                "email": "reaburoa@qq.com"
+            }
+        ],
+        "description": "PDO Class",
+        "keywords": [
+            "class",
+            "mysql",
+            "pdo"
+        ]
+    }
+]

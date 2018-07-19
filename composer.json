@@ -1,0 +1,15 @@
+{
+  "minimum-stability": "stable",
+  "require": {
+    "rean/pdo-object":"dev-master"
+  },
+  "require-dev":{
+    "rean/pdo-object":"dev-master"
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
+    }
+  }
+}
