@@ -1,8 +1,8 @@
 <?php
 
-use Core\BaseCon;
+use Core\BaseCtrl;
 
-class ErrorController extends BaseCon
+class ErrorController extends BaseCtrl
 {
     public function errorAction($exception)
     {
