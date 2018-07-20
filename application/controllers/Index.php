@@ -1,11 +1,12 @@
 <?php
 
-use Core\BaseCon;
+use Core\BaseCtrl;
 
-class IndexController extends BaseCon
+class IndexController extends BaseCtrl
 {
     public function indexAction()
     {
-        $this->getView()->render('index/index.phtml', ['foo' => 'foo123']);
+        $id = $this->get('id', 2);
+        $this->renderTpl('index', ['id' => $id]);
     }
 }
