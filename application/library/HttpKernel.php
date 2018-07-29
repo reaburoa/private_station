@@ -1,5 +1,5 @@
 <?php
-namespace Core;
+namespace Library;
 
 use Yaf\Controller_Abstract;
 use Yaf\Dispatcher;
@@ -7,18 +7,33 @@ use Yaf\Dispatcher;
 /**
  * 所有controller继承基类
  */
-abstract class BaseCtrl extends Controller_Abstract
+abstract class HttpKernel extends Controller_Abstract
 {
+    /**
+     * 控制器开始时间
+     */
     private static $ActionStartTime = null;
+
+    /**
+     * 视图实例
+     * @return object View
+     */
+    protected static $ViewObject = null;
 
     /**
      * 控制器初始化，可以将相关初始化功能记录于此
      */
     public function init()
     {
+        self::$ActionStartTime = microtime(true);
+
         // 关闭自动渲染页面
         Dispatcher::getInstance()->disableView();
-        self::$ActionStartTime = microtime(true);
+
+        $module = $this->getModuleName();
+        $view_path = View::$ViewRoot.'/'.strtolower($module);
+        self::$ViewObject = new View();
+        self::$ViewObject->setScriptPath($view_path);
     }
 
     /**
@@ -30,7 +45,6 @@ abstract class BaseCtrl extends Controller_Abstract
      */
     public function returnJson($data, $code = 0, $msg = '')
     {
-
         header('Content-Type: application/json; charset=utf-8');
         header('Take-Time: '.sprintf("%.6f", microtime(true) - self::$ActionStartTime));
         $body = [
@@ -60,24 +74,36 @@ abstract class BaseCtrl extends Controller_Abstract
      * @param string $default 默认值
      * @return string
      */
-    public function getPost($key, $default = '')
+    public function post($key, $default = '')
     {
         return $this->getRequest()->getPost($key, $default);
     }
 
+    public function route($key, $default = '')
+    {
+        return $this->getRequest()->getParam($key, $default);
+    }
+
+    /**
+     * 渲染View页面，自动渲染module目录下的视图
+     *
+     * @param string $tpl 视图文件，如foo, foo.php，foo/foo，foo/foo.php
+     * @param array $parameters 页面参数
+     */
     public function renderTpl($tpl, array $parameters = [])
     {
-        $content = $this->getViewObj()->render($tpl, $parameters);
+        header('Take-Time: '.sprintf("%.6f", microtime(true) - self::$ActionStartTime));
+        $content = self::$ViewObject->render($tpl, $parameters);
         $this->getResponse()->setBody($content);
     }
 
-    public function getViewObj()
+    /**
+     * 单独设置页面变量数据
+     * @param string $key 变量key
+     * @param mixed $value 变量值，可以是字符串、数组等格式
+     */
+    public function assign($key, $value = null)
     {
-        $modules = $this->getModuleName();
-        $view_path = APP_PATH.'/application/views/'.strtolower($modules);
-        $obj_view = new View();
-        $obj_view->setScriptPath($view_path);
-
-        return $obj_view;
+        self::$ViewObject->assign($key, $value);
     }
 }

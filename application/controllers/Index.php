@@ -1,8 +1,8 @@
 <?php
 
-use Core\BaseCtrl;
+use Library\HttpKernel;
 
-class IndexController extends BaseCtrl
+class IndexController extends HttpKernel
 {
     public function indexAction()
     {

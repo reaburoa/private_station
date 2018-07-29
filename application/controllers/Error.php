@@ -1,8 +1,8 @@
 <?php
 
-use Core\BaseCtrl;
+use Library\HttpKernel;
 
-class ErrorController extends BaseCtrl
+class ErrorController extends HttpKernel
 {
     public function errorAction($exception)
     {
