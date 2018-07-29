@@ -1,6 +1,6 @@
 <?php
 
-namespace Core;
+namespace Library;
 
 use Yaf\View_Interface;
 use Yaf\Registry;
@@ -10,9 +10,27 @@ use Yaf\Registry;
  */
 class View implements View_Interface
 {
+    /**
+     * 视图文件夹目录
+     */
     private static $ScriptPath = null;
+
+    /**
+     * 视图页面参数
+     */
     public static $ScriptParams = [];
 
+    /**
+     * 视图文件根目录
+     */
+    public static $ViewRoot = APP_PATH.'/application/views';
+
+    /**
+     * 传递变量到模板
+     *
+     * @param string $name 变量名
+     * @param mixed $value 变量值
+     */
     public function assign($name, $value = null)
     {
         self::$ScriptParams[$name] = $value;

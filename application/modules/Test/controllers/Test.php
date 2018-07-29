@@ -1,8 +1,8 @@
 <?php
 
-use Core\BaseCtrl;
+use Library\HttpKernel;
 
-class TestController extends BaseCtrl
+class TestController extends HttpKernel
 {
     public function fooAction()
     {
