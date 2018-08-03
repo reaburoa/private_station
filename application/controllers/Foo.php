@@ -3,15 +3,14 @@
 use Library\HttpKernel;
 use Service\TestService;
 use Service\Foo\FooService;
+use Library\Session;
 
 class FooController extends HttpKernel
 {
     public function fooAction()
     {
-        $session = new \Core\Session();
-        session_name("ses_id");
+        $session = new Session();
         $session_id = $session->init();
-        $session->setSessionExpire(30);
         $session->startSession();
         $session->setSession('uid', 123);
         $session->setSession('name', 'test');
@@ -21,14 +20,8 @@ class FooController extends HttpKernel
 
     public function foo1Action()
     {
-        $session = new \Core\Session();
-        var_dump(session_name());
-
-        $session->setSessionExpire(30);
+        $session = new Session();
         var_dump($session->getSession('fo'));
-/*
-        var_dump(session_get_cookie_params());
-        var_dump(session_id(), $_COOKIE['PHPSESSID'], session_cache_expire());*/
     }
 
     public function foo2Action()

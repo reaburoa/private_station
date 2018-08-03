@@ -7,13 +7,10 @@ namespace Library;
  */
 class Token implements SessionInterface
 {
-    public function set()
+    private static $salt = '';
+
+    public function genToken()
     {
-
-    }
-
-    public function get()
-    {
-
+        return sha1(self::$salt.microtime(true).uniqid());
     }
 }

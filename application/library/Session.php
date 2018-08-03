@@ -9,16 +9,14 @@ class Session implements SessionInterface
 {
     private static $salt = '';
 
+    /**
+     * Session初始化
+     */
     public function init()
     {
-        $session_id = $this->getSessionId();
+        $session_id = $this->genSessionId();
         session_id($session_id);
         return $session_id;
-    }
-
-    public function setSessionExpire($minute)
-    {
-        session_cache_expire($minute);
     }
 
     /**
@@ -41,7 +39,7 @@ class Session implements SessionInterface
      * 获取随机sessionId
      * @return string
      */
-    public function getSessionId()
+    public function genSessionId()
     {
         return sha1(self::$salt.microtime(true).uniqid());
     }
