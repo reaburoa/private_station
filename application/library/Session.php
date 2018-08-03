@@ -5,9 +5,9 @@ namespace Library;
 /**
  * 基于Session进行用户登录验证
  */
-class Session implements SessionInterface
+class Session extends SessionKernel
 {
-    private static $salt = '';
+    protected static $salt = '';
 
     /**
      * Session初始化
@@ -39,7 +39,7 @@ class Session implements SessionInterface
      * 获取随机sessionId
      * @return string
      */
-    public function genSessionId()
+    public function genUniqueId()
     {
         return sha1(self::$salt.microtime(true).uniqid());
     }
@@ -78,5 +78,15 @@ class Session implements SessionInterface
     {
         $this->startSession();
         return $key ? $_SESSION[$key] : $_SESSION;
+    }
+
+    public function setSalt()
+    {
+        self::$salt = '233';
+    }
+
+    public function getSalt()
+    {
+        return self::$salt;
     }
 }

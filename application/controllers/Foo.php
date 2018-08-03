@@ -9,7 +9,7 @@ class FooController extends HttpKernel
 {
     public function fooAction()
     {
-        $session = new Session();
+        $session = Session::getInstance();
         $session_id = $session->init();
         $session->startSession();
         $session->setSession('uid', 123);
@@ -20,8 +20,8 @@ class FooController extends HttpKernel
 
     public function foo1Action()
     {
-        $session = new Session();
-        var_dump($session->getSession('fo'));
+        $session = Session::getInstance();
+        var_dump($session->getSalt());
     }
 
     public function foo2Action()

@@ -5,12 +5,33 @@ namespace Library;
 /**
  * 基于Token机制实现用户登录
  */
-class Token implements SessionInterface
+class Token extends SessionKernel
 {
-    private static $salt = '';
+    protected static $salt = '';
 
-    public function genToken()
+    public function genUniqueId()
     {
         return sha1(self::$salt.microtime(true).uniqid());
     }
+
+    public function getToken()
+    {
+
+    }
+
+    public function setToken()
+    {
+
+    }
+
+    public function setSalt()
+    {
+
+    }
+
+    public function getSalt()
+    {
+
+    }
+
 }
