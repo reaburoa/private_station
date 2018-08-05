@@ -30,10 +30,12 @@ class View implements View_Interface
      *
      * @param string $name 变量名
      * @param mixed $value 变量值
+     * @return boolean
      */
     public function assign($name, $value = null)
     {
         self::$ScriptParams[$name] = $value;
+        return true;
     }
 
     public function display($tpl, $var_array = array())
@@ -45,8 +47,9 @@ class View implements View_Interface
     {
         ob_start();
         extract(array_merge(self::$ScriptParams, $var_array));
-        if (strpos('.php', $tpl) === false) {
-            $tpl .= '.'.Registry::get('app')->application->view->ext;
+        $tpl_ext = $this->getTplExt();
+        if (strpos('.'.$tpl_ext, $tpl) === false) {
+            $tpl .= '.'.$tpl_ext;
         }
         require $this->getScriptPath().'/'.$tpl;
         $content = ob_get_contents();
@@ -62,5 +65,13 @@ class View implements View_Interface
     public function getScriptPath()
     {
         return self::$ScriptPath;
+    }
+
+    /**
+     * 获取模板文件扩展
+     */
+    public function getTplExt()
+    {
+        return Registry::get('app')->application->view->ext;
     }
 }

@@ -5,14 +5,14 @@ namespace Library;
 /**
  * 基于Session进行用户登录验证
  */
-class Session implements SessionInterface
+class Session extends SessionKernel
 {
-    private static $salt = '';
+    protected static $salt = null;
 
     /**
      * Session初始化
      */
-    public function init()
+    public function initSessionId()
     {
         $session_id = $this->genSessionId();
         session_id($session_id);
@@ -22,9 +22,17 @@ class Session implements SessionInterface
     /**
      * 开启一个会话
      */
-    public function startSession()
+    public function initSession()
     {
-        session_start();
+        $session_conf = $this->getConf();
+        session_start([
+            'name' => $session_conf['name'],
+            'cookie_path' => $session_conf['cookie_path'],
+            'cookie_domain' => $session_conf['cookie_domain'],
+            'cookie_secure' => isset($_SERVER['HTTPS']) ? true : false,
+            'cookie_httponly' => $session_conf['cookie_http_only'],
+            'cookie_lifetime' => $session_conf['cookie_lifetime'],
+        ]);
     }
 
     /**
@@ -33,15 +41,6 @@ class Session implements SessionInterface
     public function destroySession()
     {
         session_destroy();
-    }
-
-    /**
-     * 获取随机sessionId
-     * @return string
-     */
-    public function genSessionId()
-    {
-        return sha1(self::$salt.microtime(true).uniqid());
     }
 
     /**
@@ -76,7 +75,17 @@ class Session implements SessionInterface
      */
     public function getSession($key = null)
     {
-        $this->startSession();
+        $this->initSession();
         return $key ? $_SESSION[$key] : $_SESSION;
+    }
+
+    public function setSalt()
+    {
+        self::$salt = 'session';
+    }
+
+    public function getSalt()
+    {
+        return self::$salt;
     }
 }
