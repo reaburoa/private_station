@@ -1,7 +1,6 @@
 <?php
 
 use Library\HttpKernel;
-use Yaf\Registry;
 
 class IndexController extends HttpKernel
 {

@@ -10,10 +10,8 @@ class FooController extends HttpKernel
     public function fooAction()
     {
         $session = Session::getInstance();
-        $session_id = $session->init();
-        $session->startSession();
-        $session->setSession('uid', 123);
-        $session->setSession('name', 'test');
+        $session_id = $session->initSessionId();
+        $session->initSession();
         $session->setSession(['fo' => 'foo', 'foo' => 'fo']);
         return $this->returnJson(['session_id' => $session_id]);
     }
@@ -21,7 +19,14 @@ class FooController extends HttpKernel
     public function foo1Action()
     {
         $session = Session::getInstance();
-        var_dump($session->getSalt());
+        var_dump($session->getSession('fo'));
+    }
+
+    public function logOutAction()
+    {
+        $se = Session::getInstance();
+        $se->initSession();
+        $se->destroySession();
     }
 
     public function foo2Action()

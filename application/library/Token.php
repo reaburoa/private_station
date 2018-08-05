@@ -7,12 +7,7 @@ namespace Library;
  */
 class Token extends SessionKernel
 {
-    protected static $salt = '';
-
-    public function genUniqueId()
-    {
-        return sha1(self::$salt.microtime(true).uniqid());
-    }
+    protected static $salt = null;
 
     public function getToken()
     {
@@ -26,12 +21,12 @@ class Token extends SessionKernel
 
     public function setSalt()
     {
-
+        self::$salt = 'token';
     }
 
     public function getSalt()
     {
-
+        return self::$salt;
     }
 
 }

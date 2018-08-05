@@ -2,6 +2,8 @@
 
 namespace Library;
 
+use Yaf\Registry;
+
 /**
  * 用户会话
  */
@@ -28,11 +30,30 @@ abstract class SessionKernel
         static::setSalt();
     }
 
+    /**
+     * 获取随机sessionId
+     * @return string
+     */
     public function genSessionId()
     {
         return sha1(static::$salt.microtime(true).uniqid());
     }
 
+    /**
+     * 获取会话配置信息
+     */
+    public function getConf()
+    {
+        return Registry::get('session')->session;
+    }
+
+    /**
+     * 设置会话加密盐
+     */
     abstract public function setSalt();
+
+    /**
+     * 获取会话加密盐
+     */
     abstract public function getSalt();
 }

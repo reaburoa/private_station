@@ -4,6 +4,7 @@ use Yaf\Config\Ini;
 use Yaf\Registry;
 use Yaf\Bootstrap_Abstract;
 use Yaf\Dispatcher;
+use Yaf\Application;
 
 class Bootstrap extends Bootstrap_Abstract
 {
@@ -11,8 +12,12 @@ class Bootstrap extends Bootstrap_Abstract
     {
         mb_internal_encoding('UTF-8');
         ini_set('default_socket_timeout', -1);
+        $env = Application::app()->environ();
 
-        $conf = new Ini(APP_PATH . '/conf/app.ini', 'dev');
-        Registry::set('app', $conf);
+        $app = new Ini(APP_PATH.'/conf/app.ini', $env);
+        Registry::set('app', $app);
+
+        $session = new Ini(APP_PATH.'/conf/session.ini', $env);
+        Registry::set('session', $session);
     }
 }
