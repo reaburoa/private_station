@@ -37,4 +37,11 @@ class FooController extends HttpKernel
         echo '<br />';
         echo $srv_test->foo();
     }
+
+    public function foo3Action()
+    {
+        $r = \Rean\MyRedis::getInstance('cache');
+        $r->set('foo', 123);
+        var_dump($r->get('foo'));
+    }
 }
