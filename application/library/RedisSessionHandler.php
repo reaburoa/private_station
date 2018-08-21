@@ -4,7 +4,10 @@ namespace Library;
 
 use Rean\MyRedis;
 
-class RedisSessionHandler extends \SessionHandler
+/**
+ * 使用Redis作为session存储介质
+ */
+class RedisSessionHandler implements \SessionHandlerInterface
 {
     private static $SessionPrefix = 'sess_';
 
@@ -64,10 +67,5 @@ class RedisSessionHandler extends \SessionHandler
     public function setSessionLifeTime($lifetime)
     {
         self::$Lifetime = $lifetime;
-    }
-
-    public function __destruct()
-    {
-        session_write_close();
     }
 }

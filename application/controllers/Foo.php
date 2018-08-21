@@ -20,7 +20,9 @@ class FooController extends HttpKernel
     public function foo1Action()
     {
         $session = Session::getInstance();
-        var_dump($session->getSession('fo'));
+        return $this->returnJson([
+            'fo' => $session->getSession('fo')
+        ]);
     }
 
     public function logOutAction()
