@@ -4,6 +4,7 @@ use Library\HttpKernel;
 use Service\TestService;
 use Service\Foo\FooService;
 use Library\Session;
+use Rean\MyRedis;
 
 class FooController extends HttpKernel
 {
@@ -40,7 +41,7 @@ class FooController extends HttpKernel
 
     public function foo3Action()
     {
-        $r = \Rean\MyRedis::getInstance('cache');
+        $r = MyRedis::getInstance('cache');
         $r->set('foo', 123);
         var_dump($r->get('foo'));
     }
