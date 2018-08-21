@@ -18,11 +18,11 @@ class RedisSessionHandler implements \SessionHandlerInterface
     /**
      * var @$Handler \Redis
      */
-    private static $Handler = null;
+    private static $RedisHandler = null;
 
     public function __construct()
     {
-        self::$Handler = MyRedis::getInstance(self::$RedisSessionChanel);
+        self::$RedisHandler = MyRedis::getInstance(self::$RedisSessionChanel);
     }
 
     public function close()
@@ -32,7 +32,7 @@ class RedisSessionHandler implements \SessionHandlerInterface
 
     public function destroy($session_id)
     {
-        self::$Handler->del($this->getKey($session_id));
+        self::$RedisHandler->del($this->getKey($session_id));
         return true;
     }
 
@@ -49,14 +49,14 @@ class RedisSessionHandler implements \SessionHandlerInterface
     public function read($session_id)
     {
         $key = $this->getKey($session_id);
-        $ret = MyRedis::getInstance(self::$RedisSessionChanel)->get($key);
+        $ret = self::$RedisHandler->get($key);
         return $ret === false ? '' : $ret;
     }
 
     public function write($session_id, $session_data)
     {
         $key = $this->getKey($session_id);
-        return self::$Handler->setex($key, self::$Lifetime, $session_data) === true ? true : false;
+        return self::$RedisHandler->setex($key, self::$Lifetime, $session_data) === true ? true : false;
     }
 
     private function getKey($id)
