@@ -25,6 +25,9 @@ class Session extends SessionKernel
     public function initSession()
     {
         $session_conf = $this->getConf();
+        $handler = new RedisSessionHandler();
+        $handler->setSessionLifeTime($session_conf['cookie_lifetime']);
+        session_set_save_handler($handler, true);
         session_start([
             'name' => $session_conf['name'],
             'cookie_path' => $session_conf['cookie_path'],
