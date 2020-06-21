@@ -8,7 +8,6 @@
         123
         <br/>
         <?=$id?>
-    <img src="/WP_20141130_11_42_18_Pro.jpg" width="180">
     </body>
 </html>
 

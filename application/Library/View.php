@@ -62,7 +62,7 @@ class View implements View_Interface
         self::$ScriptPath = $tpl_dir;
     }
 
-    public function getScriptPath()
+    public function getScriptPath($request = null)
     {
         return self::$ScriptPath;
     }
