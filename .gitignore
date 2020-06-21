@@ -1,3 +1,6 @@
 /.idea
 /vendor
 /composer.lock
+conf/database.php
+conf/redis.php
+public/favicon.ico
