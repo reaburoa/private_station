@@ -2,7 +2,8 @@
   "minimum-stability": "stable",
   "require": {
     "rean/pdo-object":"~1.1",
-    "rean/redis":"~1.1"
+    "rean/redis":"~1.1",
+    "illuminate/database": "^8.0"
   },
   "require-dev":{
     "rean/pdo-object":"~1.1",
