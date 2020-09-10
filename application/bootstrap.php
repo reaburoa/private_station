@@ -19,5 +19,8 @@ class Bootstrap extends Bootstrap_Abstract
 
         $session = new Ini(APP_PATH.'/conf/session.ini', $env);
         Registry::set('session', $session);
+
+        $database = new Ini(APP_PATH.'/conf/database.ini', $env);
+        Registry::set('database', $database);
     }
 }

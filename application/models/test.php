@@ -1,15 +1,13 @@
 <?php
 
-use Rean\MyPDO;
+use \Library\DatabaseKernel;
 
-class TestModel extends MyPDO
+class TestModel extends DatabaseKernel
 {
-    protected static $database = 'test';
-    protected static $table = 't_test';
-    protected static $cluster = 'test';
+    protected $table = 't_test';
 
     public function getOneRowById($id)
     {
-        return $this->getOneRow(['id' => $id]);
+        return $this->getModel($this->table)->where('id', $id)->get()->toArray();
     }
 }
