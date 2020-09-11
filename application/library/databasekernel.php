@@ -4,7 +4,6 @@ namespace Library;
 
 use Illuminate\Database\Capsule\Manager as IlluminateCapsule;
 use Illuminate\Database\Eloquent\Model as IlluminateEloquent;
-use Illuminate\Support\Facades\DB;
 use Yaf\Registry;
 
 class DatabaseKernel extends IlluminateEloquent
