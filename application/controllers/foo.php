@@ -33,11 +33,9 @@ class FooController extends HttpKernel
 
     public function foo2Action()
     {
-        $srv_test = new TestService();
-        $srv_f = new FooService();
-        echo $srv_f->fs();
+        echo FooService::getInstance()->fs();
         echo '<br />';
-        echo $srv_test->foo();
+        echo TestService::getInstance()->foo();
     }
 
 }
