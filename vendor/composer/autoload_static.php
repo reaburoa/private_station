@@ -117,8 +117,7 @@ class ComposerStaticInitba030b31305315d12ae0d93e32a01c75
         ),
         'Rean\\' => 
         array (
-            0 => __DIR__ . '/..' . '/rean/pdo-object/src',
-            1 => __DIR__ . '/..' . '/rean/redis/src',
+            0 => __DIR__ . '/..' . '/rean/redis/src',
         ),
         'Psr\\SimpleCache\\' => 
         array (
