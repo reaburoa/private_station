@@ -22,5 +22,8 @@ class Bootstrap extends Bootstrap_Abstract
 
         $database = new Ini(APP_PATH.'/conf/database.ini', $env);
         Registry::set('database', $database);
+
+        $redis = new Ini(APP_PATH.'/conf/redis.ini', $env);
+        Registry::set('redis', $redis);
     }
 }

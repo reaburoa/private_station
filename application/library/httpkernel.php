@@ -64,7 +64,7 @@ abstract class HttpKernel extends Controller_Abstract
      */
     public function get($key, $default = '')
     {
-        return $this->getRequest()->get($key, $default);
+        return $this->getRequest()->getQuery($key, $default);
     }
 
     /**
@@ -79,6 +79,25 @@ abstract class HttpKernel extends Controller_Abstract
         return $this->getRequest()->getPost($key, $default);
     }
 
+    /**
+     * 获取请求参数，不区分 GET|POST 类型
+     *
+     * @param mixed $key 请求字段
+     * @param string $default 默认值
+     * @return string
+     */
+    public function request($key, $default = '')
+    {
+        return $this->getRequest()->get($key, $default);
+    }
+
+    /**
+     * 获取URL路径数据
+     *
+     * @param mixed $key 请求字段
+     * @param string $default 默认值
+     * @return string
+     */
     public function route($key, $default = '')
     {
         return $this->getRequest()->getParam($key, $default);

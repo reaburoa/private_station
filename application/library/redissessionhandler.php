@@ -2,8 +2,6 @@
 
 namespace Library;
 
-use Rean\MyRedis;
-
 /**
  * 使用Redis作为session存储介质
  */
@@ -22,7 +20,7 @@ class RedisSessionHandler implements \SessionHandlerInterface
 
     public function __construct()
     {
-        self::$RedisHandler = MyRedis::getInstance(self::$RedisSessionChanel);
+        self::$RedisHandler = RedisKernel::getClient(self::$RedisSessionChanel);
     }
 
     public function close()

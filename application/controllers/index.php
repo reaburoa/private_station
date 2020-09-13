@@ -11,4 +11,9 @@ class IndexController extends HttpKernel
         $id = $this->get('id', 2);
         $this->renderTpl('index', ['id' => $id]);
     }
+
+    public function dAction()
+    {
+        echo "d Action\n";
+    }
 }
