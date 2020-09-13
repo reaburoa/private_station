@@ -2,7 +2,9 @@
 
 namespace Service\Foo;
 
-class FooService
+use Library\ServiceKernel;
+
+class FooService extends ServiceKernel
 {
     public function fs()
     {

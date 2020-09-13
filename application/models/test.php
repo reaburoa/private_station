@@ -8,6 +8,6 @@ class TestModel extends DatabaseKernel
 
     public function getOneRowById($id)
     {
-        return $this->getModel($this->table)->where('id', $id)->get()->toArray();
+        return $this->getModel()->where('id', $id)->get()->toArray();
     }
 }

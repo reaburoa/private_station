@@ -1,8 +1,8 @@
 <?php
 
 use Library\HttpKernel;
-use Foo\FooModel;
 use Library\Session;
+use Foo\FooModel;
 
 class TestController extends HttpKernel
 {
@@ -10,8 +10,8 @@ class TestController extends HttpKernel
     {
         $id = $this->get('id');
         var_dump($id);
-        $mod_test = new FooModel();
-        $one_row = $mod_test->getOneRowById($id);
+        $one_row = FooModel::getInstance()->getOneRowById($id);
+        \Service\TestService::getInstance()->foo();
         $this->returnJson(['foo' => 'foo_1', 'user' => $one_row]);
     }
 

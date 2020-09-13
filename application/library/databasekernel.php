@@ -8,6 +8,21 @@ use Yaf\Registry;
 
 class DatabaseKernel extends IlluminateEloquent
 {
+    protected static $instance = null;
+
+    /**
+     * @return static
+     */
+    public static function getInstance()
+    {
+        $class = get_called_class();
+        if (!isset(self::$instance[$class]) || empty(self::$instance[$class])) {
+            self::$instance[$class] = new static();
+        }
+
+        return self::$instance[$class];
+    }
+
     protected $capsule = null;
 
     public function __construct(array $attributes = array())
@@ -24,8 +39,8 @@ class DatabaseKernel extends IlluminateEloquent
         $this->capsule->bootEloquent();
     }
 
-    protected function getModel($table)
+    protected function getModel()
     {
-        return $this->capsule::table($table);
+        return $this->capsule::table($this->table);
     }
 }
