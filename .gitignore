@@ -2,3 +2,5 @@
 conf/database.php
 conf/redis.php
 public/favicon.ico
+database.ini
+redis.ini
