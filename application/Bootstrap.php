@@ -25,5 +25,13 @@ class Bootstrap extends Bootstrap_Abstract
 
         $redis = new Ini(APP_PATH.'/conf/redis.ini', $env);
         Registry::set('redis', $redis);
+
+        $router = new Ini(APP_PATH.'/conf/router.ini', $env);
+        Registry::set('router', $router);
+    }
+
+    public function _initRoute(Dispatcher $dispatcher)
+    {
+        $dispatcher->getRouter()->addConfig(Registry::get("router")->routes);
     }
 }

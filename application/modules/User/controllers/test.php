@@ -6,6 +6,11 @@ use Foo\FooModel;
 
 class TestController extends HttpKernel
 {
+    public function foo12Action()
+    {
+        echo "foo123";
+    }
+
     public function fooAction()
     {
         $id = $this->get('id');
