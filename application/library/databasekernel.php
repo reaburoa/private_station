@@ -43,4 +43,9 @@ class DatabaseKernel extends IlluminateEloquent
     {
         return $this->capsule::table($this->table);
     }
+
+    public function getConnection()
+    {
+        return $this->capsule->getConnection();
+    }
 }

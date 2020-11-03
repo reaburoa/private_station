@@ -14,7 +14,7 @@ class IndexController extends HttpKernel
 
     public function dAction()
     {
-        var_dump($this->route("name"), $this->route("value"));
+        \Service\TestService::getInstance()->foo();
         $this->returnJson(["d" => 'ddd']);
     }
 }
