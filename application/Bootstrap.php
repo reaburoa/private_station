@@ -34,4 +34,11 @@ class Bootstrap extends Bootstrap_Abstract
     {
         $dispatcher->getRouter()->addConfig(Registry::get("router")->routes);
     }
+
+    public function _initLogger(Dispatcher $dispatcher)
+    {
+        $env = Application::app()->environ();
+        $logger = new Ini(APP_PATH.'/conf/logger.ini', $env);
+        Registry::set('logger', $logger);
+    }
 }

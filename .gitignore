@@ -4,3 +4,4 @@ conf/redis.php
 public/favicon.ico
 database.ini
 redis.ini
+Runtime

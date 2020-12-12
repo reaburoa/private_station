@@ -34,6 +34,7 @@ abstract class HttpKernel extends Controller_Abstract
         $view_path = View::$ViewRoot.'/'.strtolower($module);
         self::$ViewObject = new View();
         self::$ViewObject->setScriptPath($view_path);
+        Logger::InitLogger();
     }
 
     /**
