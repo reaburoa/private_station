@@ -8,7 +8,13 @@ use Yaf\Registry;
 
 class DatabaseKernel extends IlluminateEloquent
 {
+    protected static $capsule = null;
+
     protected static $instance = null;
+
+    protected static $connections = [];
+
+    protected $connection = 'default';
 
     /**
      * @return static
@@ -23,8 +29,6 @@ class DatabaseKernel extends IlluminateEloquent
         return self::$instance[$class];
     }
 
-    protected $capsule = null;
-
     public function __construct(array $attributes = array())
     {
         parent::__construct($attributes);
@@ -33,19 +37,53 @@ class DatabaseKernel extends IlluminateEloquent
             throw new \Exception("Must configure database in .ini first");
         }
         $config = $config->database->toArray();
-        $this->capsule = new IlluminateCapsule();
-        $this->capsule->addConnection($config, "default");
-        $this->capsule->setAsGlobal();
-        $this->capsule->bootEloquent();
+        if (self::$capsule === null) {
+            self::$capsule = new IlluminateCapsule();
+//            self::$capsule->addConnection($config, "d1");
+//            self::$capsule->addConnection($config, "d2");
+            self::$capsule->addConnection($config, $this->connection);
+            self::$connections = [
+                $this->connection
+            ];
+            self::$capsule->setAsGlobal();
+            self::$capsule->bootEloquent();
+        }
     }
 
     protected function getModel()
     {
-        return $this->capsule::table($this->table);
+        return $this->getConnection()->table($this->table);
     }
 
-    public function getConnection()
+    public function getConnection($name = null)
     {
-        return $this->capsule->getConnection();
+        if ($name == null) {
+            $name = $this->connection;
+        }
+        return self::$capsule->getConnection($name);
+    }
+
+    // 开启事务
+    public function transaction()
+    {
+        foreach (self::$connections as $v) {
+            $this->getConnection($v)->beginTransaction();
+        }
+    }
+
+    // 回滚事务
+    public function rollBack($toLevel = null)
+    {
+        foreach (self::$connections as $v) {
+            $this->getConnection($v)->rollBack($toLevel);
+        }
+    }
+
+    // 事务提交
+    public function commit()
+    {
+        foreach (self::$connections as $v) {
+            $this->getConnection($v)->commit();
+        }
     }
 }
